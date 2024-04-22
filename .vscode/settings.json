@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\angys\\Downloads\\fj11-lib-contas.jar"
+    ]
+}
