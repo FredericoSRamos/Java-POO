@@ -1,5 +1,5 @@
 public class Porta {
-    boolean aberta;
+    private boolean aberta;
     String cor;
     int dimensaoX;
     int dimensaoY;
@@ -22,6 +22,6 @@ public class Porta {
 
     boolean estaAberta ()
     {
-        return aberta;
+        return this.aberta;
     }
 }

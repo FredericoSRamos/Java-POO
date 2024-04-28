@@ -1,11 +1,13 @@
 public class TestaFibonacci {
     public static void main (String[] args)
     {
-        FibonacciRecursivo fibonacci = new FibonacciRecursivo();
+        int len = 20;
 
-		for	(int i = 1;	i <= 20; i++)
+        int[] arr = new int[len];
+        
+		for	(int i = 1;	i <= len; i++)
         {
-			int	resultado =	fibonacci.calculaFibonacci(i);
+			int	resultado = arr[i-1] = FibonacciRecursivo.calculaFibonacci(i, arr);
 			System.out.println(resultado);
         }
     }

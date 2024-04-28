@@ -1,6 +1,6 @@
 package br.com.caelum.contas.modelo;
 
-public class Conta
+public class Conta implements Comparable<Conta>
 {
     protected String titular;
     protected int numero;
@@ -12,8 +12,24 @@ public class Conta
     @Override
     public String toString ()
     {
-        return "[titular="	+	this.titular	+	",	numero="	+	this.numero
-        +	",	agencia="	+	this.agencia	+	"]";
+        return "[titular = " + this.titular.toUpperCase() + ", numero = " + this.numero + ", agencia = " + this.agencia	+ "]";
+    }
+
+    @Override
+    public boolean equals (Object obj)
+    {
+        if (obj == null)
+            return false;
+
+        if (!(obj instanceof Conta))
+            return false;
+
+        return (((Conta) obj).getNumero() == this.numero && ((Conta) obj).getAgencia().equals(this.agencia));
+    }
+
+    public int compareTo (Conta outraConta)
+    {
+        return this.titular.compareTo (outraConta.titular);
     }
 
     public void setAgencia (String agencia)

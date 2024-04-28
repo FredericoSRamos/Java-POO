@@ -1,6 +1,10 @@
 package br.com.caelum.contas;
 
 import br.com.caelum.javafx.api.util.Evento;
+
+import java.util.Collections;
+import java.util.List;
+
 import br.com.caelum.contas.modelo.Conta;
 import br.com.caelum.contas.modelo.ContaCorrente;
 import br.com.caelum.contas.modelo.ContaPoupança;
@@ -13,36 +17,31 @@ public class ManipuladorDeContas
     public void criaConta (Evento evento)
     {
         String tipo = evento.getSelecionadoNoRadio("tipo");
+
         if (tipo.equals("Conta Corrente"))
-        {
             this.conta = new ContaCorrente();
-        }
-        else if (tipo.equals("Conta Poupança"))
-        {
+
+        else 
             this.conta = new ContaPoupança();
-        }
-        else
-        {
-            this.conta = new Conta();
-        }
-        this.conta.setAgencia("1234");
-        this.conta.setNumero(56789);
-        this.conta.setTitular("Batman");
+
+        this.conta.setAgencia (evento.getString ("agencia"));
+        this.conta.setNumero (evento.getInt ("numero"));
+        this.conta.setTitular (evento.getString ("titular"));
     }
 
     public void deposita (Evento evento)
     {
-        double valor = evento.getDouble("valorOperacao");
-        this.conta.depositar(valor);
+        double valor = evento.getDouble ("valorOperacao");
+        this.conta.depositar (valor);
     }
 
     public void saca (Evento evento)
     {
-        double valor = evento.getDouble("valorOperacao");
+        double valor = evento.getDouble ("valorOperacao");
 
         try
         {
-            this.conta.sacar(valor);
+            this.conta.sacar (valor);
         } catch (SaldoInsuficienteException | IllegalArgumentException e)
         {
             System.out.println (e.getMessage ());
@@ -52,7 +51,13 @@ public class ManipuladorDeContas
 
     public void transfere (Evento evento)
     {
-        evento.getSelecionadoNoCombo("destino");
-        this.conta.transfere(conta, 0);
+        evento.getSelecionadoNoCombo ("destino");
+        this.conta.transfere(conta, evento.getDouble ("valorOperacao"));
+    }
+
+    public void ordenaLista (Evento evento)
+    {
+        List<Conta> contas = evento.getLista ("destino");
+        Collections.sort (contas);
     }
 }
