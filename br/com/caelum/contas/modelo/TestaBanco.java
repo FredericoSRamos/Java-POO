@@ -17,6 +17,6 @@ public class TestaBanco {
 			banco.adiciona (conta);
         }
 
-        banco.mostraContas();
+        //banco.mostraContas();
     }
 }

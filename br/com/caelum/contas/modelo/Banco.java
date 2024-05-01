@@ -1,59 +1,38 @@
 package br.com.caelum.contas.modelo;
 
+import java.util.List;
+import java.util.Map;
+
 public class Banco {
     private String nome;
     private int numero;
-    private Conta[] contas;
-    private static int posicao = 0;
+    private List<Conta> contas;
+    private Map<String, Conta> mapContas;
 
     public Banco (String nome, int numero)
     {
         this.nome = nome;
         this.numero = numero;
-        this.contas = new ContaCorrente[10];
     }
 
     public void adiciona (Conta c)
     {
-        if (posicao >= contas.length)
-        {
-            Conta[] temp = new ContaCorrente[contas.length + 10];
-
-            for (int i = 0; i < contas.length; i++)
-            {
-                temp[i] = contas[i];
-            }
-
-            contas = temp;
-            //    throw new FullArrayException ();
-        }
-
-        contas[posicao] = c;
-        posicao++;
+        contas.add (c);
+        mapContas.put (c.getTitular(), c);
     }
 
-    public Conta[] getContas ()
+    public Conta pega (int x)
     {
-        return this.contas;
+        return contas.get (x);
     }
 
-    public void mostraContas ()
+    public int pegaQuantidadeDeContas ()
     {
-        for (Conta i : contas)
-        {
-            if (i != null)
-                System.out.println (i);
-        }
+        return contas.size ();
     }
 
-    public boolean contem (Conta conta)
+    public Conta buscaPorTitular (String nome)
     {
-        for (Conta i : contas)
-        {
-            if (i.equals(conta))
-                return true;
-        }
-
-        return false;
+        return mapContas.get (nome);
     }
 }

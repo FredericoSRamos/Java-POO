@@ -27,6 +27,12 @@ public class Conta implements Comparable<Conta>
         return (((Conta) obj).getNumero() == this.numero && ((Conta) obj).getAgencia().equals(this.agencia));
     }
 
+    @Override
+    public int hashCode ()
+    {
+        return agencia.hashCode() + numero;
+    }
+
     public int compareTo (Conta outraConta)
     {
         return this.titular.compareTo (outraConta.titular);
