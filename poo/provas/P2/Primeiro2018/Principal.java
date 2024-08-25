@@ -28,7 +28,7 @@ public class Principal
         }
         catch (FormatoIncorretoException e)
         {
-            System.out.println (e.getMessage());
+            System.out.println (e);
         }
     }
 }
